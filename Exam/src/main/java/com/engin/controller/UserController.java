@@ -48,7 +48,7 @@ public class UserController {
 		String loginmsg = request.getParameter("loginmsg");
 		if(loginmsg != null){
 			switch (loginmsg) {
-			case "null":
+			case "error":
 				map.put("loginmsg", "用户名或密码为空！");
 				break;
 			case "fail":
@@ -74,8 +74,9 @@ public class UserController {
 	@RequestMapping(value="/login")
 	public RedirectView login(User user, Map map, RedirectAttributes attr){// 登录
 //		System.out.println(userService);
-		if(user.getUsername() == null || user.getPassword() == null){
-			return new RedirectView("/user/loginm?loginmsg=null",true,false,false);
+		System.out.println(user.getUsername()+"---"+user.getPassword());
+		if(user.getUsername() == "" || user.getPassword() == ""){
+			return new RedirectView("/user/loginm?loginmsg=error",true,false,false);
 		}
 		UserExample ue = new UserExample();
 		ue.createCriteria().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
