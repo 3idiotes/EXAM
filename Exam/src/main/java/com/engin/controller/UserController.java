@@ -1,5 +1,7 @@
 package com.engin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -36,15 +38,30 @@ import com.engin.service.UserServiceImpl;
 
 @Controller
 @RequestMapping(value={"/user"})
-@SessionAttributes({"username"})
+@SessionAttributes({"username", "registername"})
 public class UserController {
 	
 	@Autowired
 	private UserServiceImpl userService;
 	
 	@RequestMapping(value="/loginm")
-	public String loginm(HttpServletRequest request, Map map){// 请求登录
+	public String loginm(HttpServletRequest request, HttpServletResponse response, Map map){// 请求登录
 		System.out.println("请求登录");
+
+//		String loginmsg = request.getParameter("loginmsg");
+//		if(loginmsg != null){
+//			switch (loginmsg) {
+//			case "null":
+//				map.put("loginmsg", "用户名或密码为空！");
+//				break;
+//			case "fail":
+//				map.put("loginmsg", "登录失败，请重新登录！");
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+
 		String loginmsg = request.getParameter("loginmsg");
 		if(loginmsg != null){
 			switch (loginmsg) {
@@ -58,49 +75,73 @@ public class UserController {
 				break;
 			}
 		}
+
 		String username = request.getParameter("username");
 		if(username != null){
-			map.put("registermsg", "注册成功!你的用户名是："+username);
+//			map.put("registermsg", "注册成功!你的用户名是："+username);
+			//try {
+				String flag=request.getParameter("flag");
+				map.put("flag", flag);
+				map.put("registername", username);
+				response.setContentType("text/html;charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//			    
+//			    out.println("<script language='javascript'>");
+//			    out.println("alert('你的用户名是:'"+username+");");
+//			    //out.println("history.back();");
+//			    out.println("</script>");
+//			    out.flush();
+//				//out.print("<script language='javascript'>alert('your userid is :"+username+"');</script>");
+			//} catch (IOException e) {
+				// TODO Auto-generated catch block
+			//	e.printStackTrace();
+			//}
+			return "login.ftl";
 		}
 		return "login.ftl";
 	}
 	
 	@RequestMapping(value="/youke")
 	public String youke(){// 游客进入
-		System.out.println("游客进入");
+//		System.out.println("游客进入");
 		return "main.ftl";
 	}
 	
 	@RequestMapping(value="/login")
-	public RedirectView login(User user, Map map, RedirectAttributes attr){// 登录
+	public @ResponseBody Student login(Map map, RedirectAttributes attr, HttpServletRequest request){// 登录
 //		System.out.println(userService);
-		System.out.println(user.getUsername()+"---"+user.getPassword());
-		if(user.getUsername() == "" || user.getPassword() == ""){
-			return new RedirectView("/user/loginm?loginmsg=error",true,false,false);
-		}
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(username+"---"+password);
+		Student student = null;
+
+//		System.out.println(user.getUsername()+"---"+user.getPassword());
+//		if(user.getUsername() == "" || user.getPassword() == ""){
+//			return new RedirectView("/user/loginm?loginmsg=error",true,false,false);
+//		}
+
 		UserExample ue = new UserExample();
-		ue.createCriteria().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
+		ue.createCriteria().andUsernameEqualTo(username).andPasswordEqualTo(password);
 		if(userService.selectByExample(ue).size() > 0){
-			String username = user.getUsername();
 			StudentKey sk = new StudentKey();
 			sk.setYear(username.substring(0, 2));
 			sk.setCid(username.substring(2, 4));
 			sk.setMid(username.substring(4, 6));
 			sk.setClassid(username.substring(6, 8));
 			sk.setSid(username.substring(8, 10));
-			Student student = userService.selectByPrimaryKey(sk);
+			student = userService.selectByPrimaryKey(sk);
 //			map.put("username", student.getName());
 			attr.addFlashAttribute("username", student.getName());
-			return new RedirectView("/user/main",true,false,false);
+			return student;
 		}
 //		map.put("loginfail", "登录失败，请重新登录！");
-		return new RedirectView("/user/loginm?loginmsg=fail",true,false,false);
+		return student;
 	}
 	
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request, Map map){
-		Map<String, ?> m = RequestContextUtils.getInputFlashMap(request);
-		String username = (String) m.get("username");
+		String username = request.getParameter("username");
 		if(username != null && !username.equals("")){
 			System.out.println(username);
 			map.put("username", username);
@@ -149,6 +190,16 @@ public class UserController {
 		
 		return "register.ftl";
 	}
+	
+//	@RequestMapping(value="/loginMsg")
+//	public @ResponseBody String loginMsg(HttpServletRequest request, HttpServletResponse response){
+//		String loginMsg = request.getParameter("loginmsg");
+//		if(loginMsg != null){
+//			System.out.println(loginMsg);
+//			return "登录失败！";
+//		}
+//		return "";
+//	}
 	
 	@RequestMapping(value="/getMByC")
 	public @ResponseBody List<Major> getMajorByCollege(HttpServletRequest request, HttpServletResponse response){
@@ -199,7 +250,7 @@ public class UserController {
 			int j = userService.insert(u);
 			
 			if(i > 0 && j > 0){
-				return new RedirectView("/user/loginm?username="+username,true,false,false);
+				return new RedirectView("/user/loginm?username="+username+"&flag=1",true,false,false);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
