@@ -1,9 +1,6 @@
 package com.engin.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class Student extends StudentKey {
-	@NotEmpty
     private String name;
 
     public String getName() {

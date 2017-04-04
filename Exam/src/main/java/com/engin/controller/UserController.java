@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.engin.model.ClassExample;
 import com.engin.model.ClassKey;
@@ -40,9 +42,26 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@RequestMapping(value="/index")
-	public String loginm(){// 请求登录
+	@RequestMapping(value="/loginm")
+	public String loginm(HttpServletRequest request, Map map){// 请求登录
 		System.out.println("请求登录");
+		String loginmsg = request.getParameter("loginmsg");
+		if(loginmsg != null){
+			switch (loginmsg) {
+			case "null":
+				map.put("loginmsg", "用户名或密码为空！");
+				break;
+			case "fail":
+				map.put("loginmsg", "登录失败，请重新登录！");
+				break;
+			default:
+				break;
+			}
+		}
+		String username = request.getParameter("username");
+		if(username != null){
+			map.put("registermsg", "注册成功!你的用户名是："+username);
+		}
 		return "login.ftl";
 	}
 	
@@ -53,8 +72,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login")
-	public String login(RedirectAttributes att, User user, Map map){// 登录
+	public RedirectView login(User user, Map map, RedirectAttributes attr){// 登录
 //		System.out.println(userService);
+		if(user.getUsername() == null || user.getPassword() == null){
+			return new RedirectView("/user/loginm?loginmsg=null",true,false,false);
+		}
 		UserExample ue = new UserExample();
 		ue.createCriteria().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
 		if(userService.selectByExample(ue).size() > 0){
@@ -66,16 +88,50 @@ public class UserController {
 			sk.setClassid(username.substring(6, 8));
 			sk.setSid(username.substring(8, 10));
 			Student student = userService.selectByPrimaryKey(sk);
-			map.put("username", student.getName());
-			return "main.ftl";
+//			map.put("username", student.getName());
+			attr.addFlashAttribute("username", student.getName());
+			return new RedirectView("/user/main",true,false,false);
 		}
-		map.put("loginfail", "登录失败，请重新登录！");
-		return "login.ftl";
+//		map.put("loginfail", "登录失败，请重新登录！");
+		return new RedirectView("/user/loginm?loginmsg=fail",true,false,false);
+	}
+	
+	@RequestMapping("/main")
+	public String main(HttpServletRequest request, Map map){
+		Map<String, ?> m = RequestContextUtils.getInputFlashMap(request);
+		String username = (String) m.get("username");
+		if(username != null && !username.equals("")){
+			System.out.println(username);
+			map.put("username", username);
+		}
+		return "main.ftl";
 	}
 	
 	@RequestMapping(value="/registerm")
-	public String registerm(Map map){
+	public String registerm(Map map, HttpServletRequest request){
 		System.out.println("请求注册");
+		
+		String registermsg = request.getParameter("registermsg");
+		if(registermsg != null){
+			System.out.println(registermsg);
+			switch (registermsg) {
+			case "inperfect":
+				map.put("registermsg", "输入信息不完整");
+				break;
+			case "inconformity":
+				map.put("registermsg", "两次密码输入不一致");
+				break;
+			case "exist":
+				map.put("registermsg", "注册失败，该同学已经注册过了");
+				break;
+			case "fail":
+				map.put("registermsg", "注册失败");
+				break;
+			default:
+				break;
+			}
+		}
+		
 		YearExample ye = new YearExample();
 		List<Year> yearList = userService.selectByExample(ye);
 		map.put("yearList", yearList);
@@ -106,8 +162,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register")
-	public String register(Year year, College college, Major major, ClassKey classkey, Student student, 
-			User user, Map map){// 注册
+	public RedirectView register(Year year, College college, Major major, ClassKey classkey, Student student, 
+			 User user, Map map){// 注册
+		if((year == null) || (college == null) || (major == null) || (classkey == null) || (student == null) ||
+				(student == null || student.getName().equals("")) ||
+				(user == null || user.getPassword().equals(""))){
+//			map.put("registermsg", "输入信息不完整");
+			return new RedirectView("/user/registerm?registermsg=inperfect",true,false,false);
+		}
+		if(!user.getPassword().equals(user.getRepassword())){
+//			map.put("registermsg", "两次密码输入不一致");
+			return new RedirectView("/user/registerm?registermsg=inconformity",true,false,false);
+		}
 		String sid = student.getSid();
 		if(Integer.parseInt(sid) < 10){
 			sid = "0"+student.getSid();
@@ -132,15 +198,14 @@ public class UserController {
 			int j = userService.insert(u);
 			
 			if(i > 0 && j > 0){
-				map.put("registermsg", "注册成功！你的用户名是："+ username);
-				return "login.ftl";
+				return new RedirectView("/user/loginm?username="+username,true,false,false);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			map.put("registermsg", "注册失败！");
-			return "registerfail.ftl";
+//			map.put("registermsg", "注册失败！该同学已经注册");
+			return new RedirectView("/user/registerm?registermsg=exist",true,false,false);
 		}
-		map.put("registermsg", "注册失败！");
-		return "registerfail.ftl";
+//		map.put("registermsg", "注册失败！");
+		return new RedirectView("/user/registerm?registermsg=fail",true,false,false);
 	}
 }

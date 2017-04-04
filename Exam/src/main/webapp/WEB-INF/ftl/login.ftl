@@ -11,11 +11,11 @@
   </head>
   <body>
   <#assign ppath= request.contextPath/> 
-  	<font color="red">${loginfail}</font><font color="red">${registermsg}</font><br>
+  	<font color="red">${loginmsg}</font><font color="red">${registermsg}</font><br>
     <form action="${ppath}/user/login" method="post">
-    	用户名：<input type="text" name="username"/>
+    	用户名：<input type="text" name="username" id="username"/>
     	<br>
-    	密&nbsp;码<input type="text" name="password"/>
+    	密&nbsp;&nbsp;码<input type="text" name="password" id="password"/>
     	<br>
     	<input type="submit" name="tijiao" value="登录"/>
     </form>

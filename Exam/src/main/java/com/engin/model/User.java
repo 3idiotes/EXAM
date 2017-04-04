@@ -7,8 +7,18 @@ public class User {
     private String username;
 	@NotEmpty
     private String password;
+	@NotEmpty
+	private String repassword;
 
-    public String getUsername() {
+    public String getRepassword() {
+		return repassword;
+	}
+
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
+
+	public String getUsername() {
         return username;
     }
 

@@ -1,5 +1,3 @@
-<#assign spring=JspTaglibs["http://www.springframework.org/tags"]/>
-<#assign form=JspTaglibs["http://www.springframework.org/tags/form"] />
 <html>
   <head>
     
@@ -38,7 +36,7 @@
   
   <body>
   	<font color="red">${registermsg}</font><br>
-    <form action="${ppath}/user/register" method="post">
+    <form commandName="user" action="${ppath}/user/register" method="post">
     	入学年份：<select id="year" name="year"/>  
     			<option disabled selected value>-请选择年份-</option>
    				<#list yearList as item>
@@ -63,7 +61,9 @@
 	             你的学号：<input type="number" name="sid" min="01" max="40"/><br>
 	             你的名字：<input type="text" name="name" placeholder="请输入真实姓名"/><br>
 	             请输入密码：<input type="text" name="password" placeholder="密码不能为空"/><br>
+	             再次输入密码：<input type="text" name="repassword" placeholder="密码不能为空"/><br>
 		<input type="submit" name="register" value="注册"/>
   	</form>
   </body>
+  
 </html>

@@ -14,7 +14,7 @@
 <body>
 	<h1 style="color: red">欢迎进入在线考试系统</h1>
 	<a href="${ppath}/user/youke">立即进入</a><br>
-	<a href="${ppath}/user/index">登录</a><br>
+	<a href="${ppath}/user/loginm">登录</a><br>
 	<a href="${ppath}/user/registerm">注册</a>
 </body>
 </html>
