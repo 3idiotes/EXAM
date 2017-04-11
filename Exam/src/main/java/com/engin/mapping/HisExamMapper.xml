@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.engin.dao.ErrorMapper" >
-  <resultMap id="BaseResultMap" type="com.engin.model.ErrorKey" >
-    <id column="username" property="username" jdbcType="VARCHAR" />
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <id column="flag" property="flag" jdbcType="INTEGER" />
+<mapper namespace="com.engin.dao.HisExamMapper" >
+  <resultMap id="BaseResultMap" type="com.engin.model.HisExam" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="examtype" property="examtype" jdbcType="VARCHAR" />
+    <result column="submitime" property="submitime" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    username, id, flag
+    id, username, examtype, submitime, score
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engin.model.ErrorExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engin.model.HisExamExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from error
+    from hisexam
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,66 +83,88 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.engin.model.ErrorKey" >
-    delete from error
-    where username = #{username,jdbcType=VARCHAR}
-      and id = #{id,jdbcType=VARCHAR}
-      and flag = #{flag,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hisexam
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hisexam
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.engin.model.ErrorExample" >
-    delete from error
+  <delete id="deleteByExample" parameterType="com.engin.model.HisExamExample" >
+    delete from hisexam
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engin.model.ErrorKey" >
-    insert into error (username, id, flag
-      )
-    values (#{username,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.engin.model.HisExam" >
+    insert into hisexam (id, username, examtype, 
+      submitime, score)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{examtype,jdbcType=VARCHAR}, 
+      #{submitime,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.engin.model.ErrorKey" >
-    insert into error
+  <insert id="insertSelective" parameterType="com.engin.model.HisExam" >
+    insert into hisexam
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="username != null" >
-        username,
-      </if>
       <if test="id != null" >
         id,
       </if>
-      <if test="flag != null" >
-        flag,
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="examtype != null" >
+        examtype,
+      </if>
+      <if test="submitime != null" >
+        submitime,
+      </if>
+      <if test="score != null" >
+        score,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+      <if test="examtype != null" >
+        #{examtype,jdbcType=VARCHAR},
       </if>
-      <if test="flag != null" >
-        #{flag,jdbcType=INTEGER},
+      <if test="submitime != null" >
+        #{submitime,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.engin.model.ErrorExample" resultType="java.lang.Integer" >
-    select count(*) from error
+  <select id="countByExample" parameterType="com.engin.model.HisExamExample" resultType="java.lang.Integer" >
+    select count(*) from hisexam
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update error
+    update hisexam
     <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
+      <if test="record.examtype != null" >
+        examtype = #{record.examtype,jdbcType=VARCHAR},
       </if>
-      <if test="record.flag != null" >
-        flag = #{record.flag,jdbcType=INTEGER},
+      <if test="record.submitime != null" >
+        submitime = #{record.submitime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -148,12 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update error
-    set username = #{record.username,jdbcType=VARCHAR},
-      id = #{record.id,jdbcType=VARCHAR},
-      flag = #{record.flag,jdbcType=INTEGER}
+    update hisexam
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      examtype = #{record.examtype,jdbcType=VARCHAR},
+      submitime = #{record.submitime,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.engin.model.HisExam" >
+    update hisexam
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="examtype != null" >
+        examtype = #{examtype,jdbcType=VARCHAR},
+      </if>
+      <if test="submitime != null" >
+        submitime = #{submitime,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.engin.model.HisExam" >
+    update hisexam
+    set username = #{username,jdbcType=VARCHAR},
+      examtype = #{examtype,jdbcType=VARCHAR},
+      submitime = #{submitime,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

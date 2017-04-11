@@ -3,14 +3,14 @@ package com.engin.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorExample {
+public class BigErrorExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ErrorExample() {
+    public BigErrorExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -174,73 +174,63 @@ public class ErrorExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
+        public Criteria andBqidIsNull() {
+            addCriterion("bqid is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
+        public Criteria andBqidIsNotNull() {
+            addCriterion("bqid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(String value) {
-            addCriterion("id =", value, "id");
+        public Criteria andBqidEqualTo(Integer value) {
+            addCriterion("bqid =", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(String value) {
-            addCriterion("id <>", value, "id");
+        public Criteria andBqidNotEqualTo(Integer value) {
+            addCriterion("bqid <>", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(String value) {
-            addCriterion("id >", value, "id");
+        public Criteria andBqidGreaterThan(Integer value) {
+            addCriterion("bqid >", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(String value) {
-            addCriterion("id >=", value, "id");
+        public Criteria andBqidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bqid >=", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(String value) {
-            addCriterion("id <", value, "id");
+        public Criteria andBqidLessThan(Integer value) {
+            addCriterion("bqid <", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(String value) {
-            addCriterion("id <=", value, "id");
+        public Criteria andBqidLessThanOrEqualTo(Integer value) {
+            addCriterion("bqid <=", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLike(String value) {
-            addCriterion("id like", value, "id");
+        public Criteria andBqidIn(List<Integer> values) {
+            addCriterion("bqid in", values, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotLike(String value) {
-            addCriterion("id not like", value, "id");
+        public Criteria andBqidNotIn(List<Integer> values) {
+            addCriterion("bqid not in", values, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<String> values) {
-            addCriterion("id in", values, "id");
+        public Criteria andBqidBetween(Integer value1, Integer value2) {
+            addCriterion("bqid between", value1, value2, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<String> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(String value1, String value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(String value1, String value2) {
-            addCriterion("id not between", value1, value2, "id");
+        public Criteria andBqidNotBetween(Integer value1, Integer value2) {
+            addCriterion("bqid not between", value1, value2, "bqid");
             return (Criteria) this;
         }
 

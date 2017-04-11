@@ -1,11 +1,19 @@
 package com.engin.model;
 
-public class ErrorKey {
+public class QueCollectKey {
+    private Integer qcid;
+
     private String username;
 
     private String id;
 
-    private Integer flag;
+    public Integer getQcid() {
+        return qcid;
+    }
+
+    public void setQcid(Integer qcid) {
+        this.qcid = qcid;
+    }
 
     public String getUsername() {
         return username;
@@ -21,13 +29,5 @@ public class ErrorKey {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
     }
 }

@@ -3,14 +3,14 @@ package com.engin.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorExample {
+public class BqCollectExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ErrorExample() {
+    public BqCollectExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,6 +104,66 @@ public class ErrorExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andBqcidIsNull() {
+            addCriterion("bqcid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidIsNotNull() {
+            addCriterion("bqcid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidEqualTo(Integer value) {
+            addCriterion("bqcid =", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidNotEqualTo(Integer value) {
+            addCriterion("bqcid <>", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidGreaterThan(Integer value) {
+            addCriterion("bqcid >", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bqcid >=", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidLessThan(Integer value) {
+            addCriterion("bqcid <", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidLessThanOrEqualTo(Integer value) {
+            addCriterion("bqcid <=", value, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidIn(List<Integer> values) {
+            addCriterion("bqcid in", values, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidNotIn(List<Integer> values) {
+            addCriterion("bqcid not in", values, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidBetween(Integer value1, Integer value2) {
+            addCriterion("bqcid between", value1, value2, "bqcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBqcidNotBetween(Integer value1, Integer value2) {
+            addCriterion("bqcid not between", value1, value2, "bqcid");
+            return (Criteria) this;
+        }
+
         public Criteria andUsernameIsNull() {
             addCriterion("username is null");
             return (Criteria) this;
@@ -174,133 +234,63 @@ public class ErrorExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
+        public Criteria andBqidIsNull() {
+            addCriterion("bqid is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
+        public Criteria andBqidIsNotNull() {
+            addCriterion("bqid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(String value) {
-            addCriterion("id =", value, "id");
+        public Criteria andBqidEqualTo(Integer value) {
+            addCriterion("bqid =", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(String value) {
-            addCriterion("id <>", value, "id");
+        public Criteria andBqidNotEqualTo(Integer value) {
+            addCriterion("bqid <>", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(String value) {
-            addCriterion("id >", value, "id");
+        public Criteria andBqidGreaterThan(Integer value) {
+            addCriterion("bqid >", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(String value) {
-            addCriterion("id >=", value, "id");
+        public Criteria andBqidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bqid >=", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(String value) {
-            addCriterion("id <", value, "id");
+        public Criteria andBqidLessThan(Integer value) {
+            addCriterion("bqid <", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(String value) {
-            addCriterion("id <=", value, "id");
+        public Criteria andBqidLessThanOrEqualTo(Integer value) {
+            addCriterion("bqid <=", value, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdLike(String value) {
-            addCriterion("id like", value, "id");
+        public Criteria andBqidIn(List<Integer> values) {
+            addCriterion("bqid in", values, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotLike(String value) {
-            addCriterion("id not like", value, "id");
+        public Criteria andBqidNotIn(List<Integer> values) {
+            addCriterion("bqid not in", values, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<String> values) {
-            addCriterion("id in", values, "id");
+        public Criteria andBqidBetween(Integer value1, Integer value2) {
+            addCriterion("bqid between", value1, value2, "bqid");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<String> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(String value1, String value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(String value1, String value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIsNull() {
-            addCriterion("flag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIsNotNull() {
-            addCriterion("flag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagEqualTo(Integer value) {
-            addCriterion("flag =", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotEqualTo(Integer value) {
-            addCriterion("flag <>", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThan(Integer value) {
-            addCriterion("flag >", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThanOrEqualTo(Integer value) {
-            addCriterion("flag >=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThan(Integer value) {
-            addCriterion("flag <", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThanOrEqualTo(Integer value) {
-            addCriterion("flag <=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIn(List<Integer> values) {
-            addCriterion("flag in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotIn(List<Integer> values) {
-            addCriterion("flag not in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagBetween(Integer value1, Integer value2) {
-            addCriterion("flag between", value1, value2, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotBetween(Integer value1, Integer value2) {
-            addCriterion("flag not between", value1, value2, "flag");
+        public Criteria andBqidNotBetween(Integer value1, Integer value2) {
+            addCriterion("bqid not between", value1, value2, "bqid");
             return (Criteria) this;
         }
     }

@@ -1,9 +1,9 @@
 package com.engin.model;
 
-public class ErrorKey {
+public class BigErrorKey {
     private String username;
 
-    private String id;
+    private Integer bqid;
 
     private Integer flag;
 
@@ -15,12 +15,12 @@ public class ErrorKey {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getId() {
-        return id;
+    public Integer getBqid() {
+        return bqid;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setBqid(Integer bqid) {
+        this.bqid = bqid;
     }
 
     public Integer getFlag() {

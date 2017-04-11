@@ -3,14 +3,14 @@ package com.engin.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorExample {
+public class QueCollectExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ErrorExample() {
+    public QueCollectExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -102,6 +102,66 @@ public class ErrorExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andQcidIsNull() {
+            addCriterion("qcid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidIsNotNull() {
+            addCriterion("qcid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidEqualTo(Integer value) {
+            addCriterion("qcid =", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidNotEqualTo(Integer value) {
+            addCriterion("qcid <>", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidGreaterThan(Integer value) {
+            addCriterion("qcid >", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("qcid >=", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidLessThan(Integer value) {
+            addCriterion("qcid <", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidLessThanOrEqualTo(Integer value) {
+            addCriterion("qcid <=", value, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidIn(List<Integer> values) {
+            addCriterion("qcid in", values, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidNotIn(List<Integer> values) {
+            addCriterion("qcid not in", values, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidBetween(Integer value1, Integer value2) {
+            addCriterion("qcid between", value1, value2, "qcid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQcidNotBetween(Integer value1, Integer value2) {
+            addCriterion("qcid not between", value1, value2, "qcid");
+            return (Criteria) this;
         }
 
         public Criteria andUsernameIsNull() {
@@ -241,66 +301,6 @@ public class ErrorExample {
 
         public Criteria andIdNotBetween(String value1, String value2) {
             addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIsNull() {
-            addCriterion("flag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIsNotNull() {
-            addCriterion("flag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagEqualTo(Integer value) {
-            addCriterion("flag =", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotEqualTo(Integer value) {
-            addCriterion("flag <>", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThan(Integer value) {
-            addCriterion("flag >", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThanOrEqualTo(Integer value) {
-            addCriterion("flag >=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThan(Integer value) {
-            addCriterion("flag <", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThanOrEqualTo(Integer value) {
-            addCriterion("flag <=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIn(List<Integer> values) {
-            addCriterion("flag in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotIn(List<Integer> values) {
-            addCriterion("flag not in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagBetween(Integer value1, Integer value2) {
-            addCriterion("flag between", value1, value2, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotBetween(Integer value1, Integer value2) {
-            addCriterion("flag not between", value1, value2, "flag");
             return (Criteria) this;
         }
     }

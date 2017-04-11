@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.engin.dao.ErrorMapper" >
-  <resultMap id="BaseResultMap" type="com.engin.model.ErrorKey" >
+<mapper namespace="com.engin.dao.BigErrorMapper" >
+  <resultMap id="BaseResultMap" type="com.engin.model.BigErrorKey" >
     <id column="username" property="username" jdbcType="VARCHAR" />
-    <id column="id" property="id" jdbcType="VARCHAR" />
+    <id column="bqid" property="bqid" jdbcType="INTEGER" />
     <id column="flag" property="flag" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    username, id, flag
+    username, bqid, flag
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engin.model.ErrorExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engin.model.BigErrorExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from error
+    from bigerror
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,32 +81,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.engin.model.ErrorKey" >
-    delete from error
+  <delete id="deleteByPrimaryKey" parameterType="com.engin.model.BigErrorKey" >
+    delete from bigerror
     where username = #{username,jdbcType=VARCHAR}
-      and id = #{id,jdbcType=VARCHAR}
+      and bqid = #{bqid,jdbcType=INTEGER}
       and flag = #{flag,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.engin.model.ErrorExample" >
-    delete from error
+  <delete id="deleteByExample" parameterType="com.engin.model.BigErrorExample" >
+    delete from bigerror
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engin.model.ErrorKey" >
-    insert into error (username, id, flag
+  <insert id="insert" parameterType="com.engin.model.BigErrorKey" >
+    insert into bigerror (username, bqid, flag
       )
-    values (#{username,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}
+    values (#{username,jdbcType=VARCHAR}, #{bqid,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.engin.model.ErrorKey" >
-    insert into error
+  <insert id="insertSelective" parameterType="com.engin.model.BigErrorKey" >
+    insert into bigerror
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="username != null" >
         username,
       </if>
-      <if test="id != null" >
-        id,
+      <if test="bqid != null" >
+        bqid,
       </if>
       <if test="flag != null" >
         flag,
@@ -116,28 +116,28 @@
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+      <if test="bqid != null" >
+        #{bqid,jdbcType=INTEGER},
       </if>
       <if test="flag != null" >
         #{flag,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.engin.model.ErrorExample" resultType="java.lang.Integer" >
-    select count(*) from error
+  <select id="countByExample" parameterType="com.engin.model.BigErrorExample" resultType="java.lang.Integer" >
+    select count(*) from bigerror
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update error
+    update bigerror
     <set >
       <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
+      <if test="record.bqid != null" >
+        bqid = #{record.bqid,jdbcType=INTEGER},
       </if>
       <if test="record.flag != null" >
         flag = #{record.flag,jdbcType=INTEGER},
@@ -148,9 +148,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update error
+    update bigerror
     set username = #{record.username,jdbcType=VARCHAR},
-      id = #{record.id,jdbcType=VARCHAR},
+      bqid = #{record.bqid,jdbcType=INTEGER},
       flag = #{record.flag,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
