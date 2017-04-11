@@ -17,6 +17,8 @@ public interface ErrorMapper {
     int insertSelective(ErrorKey record);
 
     List<ErrorKey> selectByExample(ErrorExample example);
+    
+    List<String> selectQusIdByUser(String username);
 
     int updateByExampleSelective(@Param("record") ErrorKey record, @Param("example") ErrorExample example);
 

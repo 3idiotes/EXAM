@@ -81,6 +81,9 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectBqidByUser" resultType="Integer" parameterType="String" >
+   	select distinct bqid from bigerror where username = #{username,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.engin.model.BigErrorKey" >
     delete from bigerror
     where username = #{username,jdbcType=VARCHAR}

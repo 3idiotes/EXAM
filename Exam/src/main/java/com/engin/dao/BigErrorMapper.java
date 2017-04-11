@@ -17,6 +17,8 @@ public interface BigErrorMapper {
     int insertSelective(BigErrorKey record);
 
     List<BigErrorKey> selectByExample(BigErrorExample example);
+    
+    List<Integer> selectBqidByUser(String username); 
 
     int updateByExampleSelective(@Param("record") BigErrorKey record, @Param("example") BigErrorExample example);
 

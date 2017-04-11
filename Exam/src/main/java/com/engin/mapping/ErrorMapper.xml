@@ -81,6 +81,9 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectQusIdByUser" resultType="String" parameterType="String" >
+   	select distinct id from error where username = #{username,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.engin.model.ErrorKey" >
     delete from error
     where username = #{username,jdbcType=VARCHAR}

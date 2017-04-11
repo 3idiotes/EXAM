@@ -86,7 +86,7 @@
 			</h2>
 			<ul>
 				<li><a href="user/paper/list.thtml" target="main">我的试卷</a></li>
-				<li><a href="user/paper/history.thtml" target="main">历史考试</a></li>
+				<li><a href="exam/hisExam" target="main">历史考试</a></li>
 			</ul>
 		</div>
 
@@ -118,7 +118,7 @@
 					class="tmc_menu_account">个人信息</a>
 			</h2>
 			<ul>
-				<li><a href="user/collection/list.thtml" target="main">我的错题集</a></li>
+				<li><a href="exam/getErrQueList" target="main">我的错题集</a></li>
 				<li><a href="user/profile.thtml" target="main">账户信息</a></li>
 			</ul>
 		</div>
