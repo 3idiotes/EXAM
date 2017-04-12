@@ -15,8 +15,10 @@ import com.engin.model.ClassExample;
 import com.engin.model.ClassKey;
 import com.engin.model.College;
 import com.engin.model.CollegeExample;
+import com.engin.model.CollegeKey;
 import com.engin.model.Major;
 import com.engin.model.MajorExample;
+import com.engin.model.MajorKey;
 import com.engin.model.Student;
 import com.engin.model.StudentExample;
 import com.engin.model.StudentKey;
@@ -42,6 +44,12 @@ public class UserServiceImpl implements IUserService{
 	public int insert(User record) {
 		// TODO Auto-generated method stub
 		return userDao.insert(record);
+	}
+	
+	@Override
+	public int updateByExampleSelective(User record, UserExample example) {
+		// TODO Auto-generated method stub
+		return userDao.updateByExampleSelective(record, example);
 	}
 	
 	@Autowired
@@ -83,6 +91,12 @@ public class UserServiceImpl implements IUserService{
 		return majorDao.selectByExample(example);
 	}
 	
+	@Override
+	public Major selectByPrimaryKey(MajorKey key) {
+		// TODO Auto-generated method stub
+		return majorDao.selectByPrimaryKey(key);
+	}
+	
 	@Autowired
 	private ClassMapper classDao;
 	
@@ -105,5 +119,29 @@ public class UserServiceImpl implements IUserService{
 	public Student selectByPrimaryKey(StudentKey key) {
 		// TODO Auto-generated method stub
 		return studentDao.selectByPrimaryKey(key);
+	}
+	
+	@Autowired
+	private CollegeMapper collDao;
+
+	@Override
+	public List<College> selectByExample(CollegeExample example) {
+		// TODO Auto-generated method stub
+		return collDao.selectByExample(example);
+	}
+	
+	@Override
+	public College selectByPrimaryKey(CollegeKey key) {
+		// TODO Auto-generated method stub
+		return collDao.selectByPrimaryKey(key);
+	}
+
+	@Autowired
+	private ClassMapper claDao;
+	
+	@Override
+	public List<ClassKey> selectByExample(ClassExample example) {
+		// TODO Auto-generated method stub
+		return claDao.selectByExample(example);
 	}
 }

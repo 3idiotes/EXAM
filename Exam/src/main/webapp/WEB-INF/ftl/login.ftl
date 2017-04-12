@@ -118,13 +118,10 @@ td {
                     url : CommitUrl,
                     success : function(data) {
                     	if(data != ""){
-                    		var name = data.name;
-                    		window.location.href="${ppath}/user/main?username="+name;
+                    		window.location.href="${ppath}/user/main";
                     	}else{
-                    		
-                    		alert("登录失败，请重新登录！");
+                    		alert("登录失败，用户名或密码错误！");
     					}
-                    	
 					}
                     });
  }

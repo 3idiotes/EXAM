@@ -119,7 +119,7 @@
 			</h2>
 			<ul>
 				<li><a href="exam/getErrQueList" target="main">我的错题集</a></li>
-				<li><a href="user/profile.thtml" target="main">账户信息</a></li>
+				<li><a href="exam/userMessage" target="main">账户信息</a></li>
 			</ul>
 		</div>
 

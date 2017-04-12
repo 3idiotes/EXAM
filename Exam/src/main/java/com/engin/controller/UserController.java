@@ -80,6 +80,7 @@ public class UserController {
 			sk.setClassid(username.substring(6, 8));
 			sk.setSid(username.substring(8, 10));
 			student = userService.selectByPrimaryKey(sk);
+			map.put("username", student.getName());
 			return student;
 		}
 		return student;
@@ -87,11 +88,11 @@ public class UserController {
 
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request, Map map){
-		String username = request.getParameter("username");
-		if(username != null && !username.equals("")){
-			System.out.println(username);
-			map.put("username", username);
-		}
+//		String username = request.getParameter("username");
+//		if(username != null && !username.equals("")){
+//			System.out.println(username);
+//			map.put("username", username);
+//		}
 		return "main.ftl";
 	}
 

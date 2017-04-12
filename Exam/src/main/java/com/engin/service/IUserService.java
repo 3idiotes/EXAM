@@ -2,10 +2,16 @@ package com.engin.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.engin.model.ClassExample;
 import com.engin.model.ClassKey;
 import com.engin.model.College;
+import com.engin.model.CollegeExample;
+import com.engin.model.CollegeKey;
 import com.engin.model.Major;
 import com.engin.model.MajorExample;
+import com.engin.model.MajorKey;
 import com.engin.model.Student;
 import com.engin.model.StudentExample;
 import com.engin.model.StudentKey;
@@ -25,4 +31,9 @@ public interface IUserService {
 	int insert(Student record);
 	int insert(User record);
 	Student selectByPrimaryKey(StudentKey key);
+	List<College> selectByExample(CollegeExample example);
+	List<ClassKey> selectByExample(ClassExample example);
+	College selectByPrimaryKey(CollegeKey key);
+	Major selectByPrimaryKey(MajorKey key);
+	int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 }

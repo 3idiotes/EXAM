@@ -25,10 +25,10 @@
 				if(window.confirm('确定要退出登录吗？')){
 					$.ajax({
 						type: "POST",
-						url: "",
-						data: "t=" + Math.random(),
+						url: "exam/loginOut",
+						data: "",
 						success: function(msg){
-							top.location.href = "";
+							top.location.href="index/index";
 						},
 						error : function(){
 							top.location.href = "";
@@ -62,8 +62,8 @@
 		<div class="tm_head_tools">
 			<img src=" images/ico_account.png" align="absmiddle" /> <span
 				style="cursor:pointer"
-				title='真实姓名 : ${username}   &#10学号 : 等俊哥回来写的  &#10最后登录时间 : '>
-				${username} </span> | <a href="user/profile.thtml" target="main">账号</a> | <a
+				title='真实姓名 : ${sessionScope.username}   &#10学号 : ${sessionScope.registername} '>
+				${sessionScope.username} </span> | <a href="exam/toUserModify" target="main">账号修改</a> | <a
 				href="javascript:void(0);" onclick="return tm.logout();">退出</a>
 		</div>
 
