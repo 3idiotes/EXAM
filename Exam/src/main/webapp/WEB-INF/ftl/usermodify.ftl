@@ -4,37 +4,39 @@
 <#assign ppath= request.contextPath/>
 <script src="${ppath}/js/jquery-3.2.0.min.js" type="text/javascript"></script>
 <script src="${ppath}/js/baseutil.js" type="text/javascript"></script>
-<script src="${ppath}/js/layer.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${ppath}/css/style.css" />	
 <script type="text/javascript">
-	function checkform1()
-	{
-	   if(document.form1.password.value!=document.form1.password1.value)
-	   {
-	    alert("两次输入密码不一致");
-	    document.GetElementById("password").value="";
-	    document.GetElementById("password1").value="";
-	    return false;
-	   }else{
-	   	f1();
-	   }
-	  return true;  
-	}
-	function f1(){
-		$.ajax({
-            		data : "",
+	function validate() {
+            var pw1 = document.getElementById("password").value;
+            var pw2 = document.getElementById("password1").value;
+            if(pw1 == "" || pw2 == ""){
+            	alert("密码不能为空");
+            	return false;
+			}
+            if(pw1 == pw2) {
+                $.ajax({
+            		data : {password : pw1},
                     type : "POST",
                     url : "${ppath}/exam/userModify",
                     success : function(data) {
-                    	alert(data);
                     	if(data == "1"){
                     		alert("修改成功！");
+                    		window.location.href="${ppath}/welcome.jsp";
                     	}else if(data == "0"){
                     		alert("修改失败!");
                     	}
 					}
-                    });		
-	}
+				});	
+				return true;
+            }
+            else {
+            	alert("两次输入的密码不相同");
+            	document.getElementById("password").value = "";
+            	document.getElementById("password1").value = "";
+                return false;
+            }   
+            return false;      
+     }
 </script>
 </head>
 
@@ -58,7 +60,7 @@
         
         <br/>
         <div class="tm_container">
-			<form action="${ppath}/exam/userModify" method="post" name="form1">
+			<#-- <form action="${ppath}/exam/userModify" method="post" name="form1"> -->
         	<table width="100%" cellpadding="5" border="0" class="tm_table_form">
             	<tbody>
                     <tr>
@@ -76,7 +78,7 @@
                     <tr>
                     	<th>确认密码：</th>
                     	<td>
-                    		<input type="password" id="password" name="password" class="tm_txt" size="50" maxlength="30" />
+                    		<input type="password" id="password1" name="password1" class="tm_txt" size="50" maxlength="30" />
                     	</td>
                     </tr>
                     
@@ -87,13 +89,13 @@
                 	<tr>
                     	<th></th>
                         <td>
-                        	<button class="tm_btn tm_btn_primary" type="submit" onclick="return checkform1();">提交</button>
+                        	<button class="tm_btn tm_btn_primary" type="submit" onclick="return validate();">提交</button>
                         </td>
                     </tr>
                 </tfoot>
             </table>
 
-			</form>
+			<#-- </form> -->
         </div>
         
         

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.engin.model.BigErrorExample;
 import com.engin.model.BigErrorKey;
@@ -45,28 +46,30 @@ public class ExamController {
 
 	@Autowired
 	private ExamServiceImpl examService;
-	
+
 	@Autowired
 	private UserServiceImpl userService;
 
 	@RequestMapping("/getErrQueList")
-	public String getErrQueList(HttpSession httpSession, Map map){
+	public String getErrQueList(HttpSession httpSession, Map map) {
 		String username = (String) httpSession.getAttribute("registername");
-		if(username == null){
+		if (username == null) {
 			return "allerror.ftl";
 		}
 
 		List<QuestionWithBLOBs> queErrList = new ArrayList<QuestionWithBLOBs>();
 		List<String> qusIdList = examService.selectQusIdByUser(username);
-		for(String q : qusIdList){
+		for (String q : qusIdList) {
 			System.out.println(q);
 			QuestionExample qe = new QuestionExample();
 			qe.createCriteria().andIdEqualTo(q);
-			List<QuestionWithBLOBs> t = examService.selectByExampleWithBLOBs(qe);
-			for(QuestionWithBLOBs r : t){
+			List<QuestionWithBLOBs> t = examService
+					.selectByExampleWithBLOBs(qe);
+			for (QuestionWithBLOBs r : t) {
 				queErrList.add(r);
-				System.out.println(r.getText()+"  答案："+r.getAnswer());
-				System.out.println("A."+r.getA()+"   B."+r.getB()+"   C."+r.getC()+"   D."+r.getD());
+				System.out.println(r.getText() + "  答案：" + r.getAnswer());
+				System.out.println("A." + r.getA() + "   B." + r.getB()
+						+ "   C." + r.getC() + "   D." + r.getD());
 			}
 		}
 		map.put("QueErrList", queErrList);
@@ -75,15 +78,15 @@ public class ExamController {
 
 		List<BigQuestion> bqErrList = new ArrayList<BigQuestion>();
 		List<Integer> bqidList = examService.selectBqidByUser(username);
-		for(Integer q : bqidList){
+		for (Integer q : bqidList) {
 			System.out.println(q);
 			BigQuestionExample bqe = new BigQuestionExample();
 			bqe.createCriteria().andBqidEqualTo(q);
 			List<BigQuestion> t = examService.selectByExampleWithBLOBs(bqe);
-			for(BigQuestion r : t){
+			for (BigQuestion r : t) {
 				bqErrList.add(r);
 				System.out.println(r.getText());
-				System.out.println("答案："+r.getAnswer());
+				System.out.println("答案：" + r.getAnswer());
 			}
 
 		}
@@ -93,76 +96,87 @@ public class ExamController {
 	}
 
 	@RequestMapping("/hisExam")
-	public String hisExam(HttpSession httpSession, Map map){
-		String username = (String)httpSession.getAttribute("registername");
-		if(username == null){
+	public String hisExam(HttpSession httpSession, Map map) {
+		String username = (String) httpSession.getAttribute("registername");
+		if (username == null) {
 			return "hisExam.ftl";
 		}
 		HisExamExample hee = new HisExamExample();
 		hee.createCriteria().andUsernameEqualTo(username);
 		List<HisExam> hisExamList = examService.selectByExample(hee);
-		for(HisExam q : hisExamList){
-			System.out.println(q.getExamtype()+"==="+q.getSubmitime()+"==="+q.getScore());
+		for (HisExam q : hisExamList) {
+			System.out.println(q.getExamtype() + "===" + q.getSubmitime()
+					+ "===" + q.getScore());
 		}
 		map.put("HisExamList", hisExamList);
 		return "hisExam.ftl";
 	}
 
 	@RequestMapping("/loginOut")
-	public @ResponseBody void loginOut(HttpSession httpSession, HttpServletRequest request, Map map){
-		System.out.println("loginOut:"+(String) httpSession.getAttribute("registername")+"---"+(String) httpSession.getAttribute("username"));
-		//获取所有的session
-		Enumeration<String> en=request.getSession().getAttributeNames();
-		while(en.hasMoreElements()){//判断是否还有下一个元素
-			//除移所有session   
+	public @ResponseBody
+	void loginOut(HttpSession httpSession, HttpServletRequest request, Map map) {
+		System.out.println("loginOut:"
+				+ (String) httpSession.getAttribute("registername") + "---"
+				+ (String) httpSession.getAttribute("username"));
+		// 获取所有的session
+		Enumeration<String> en = request.getSession().getAttributeNames();
+		while (en.hasMoreElements()) {// 判断是否还有下一个元素
+			// 除移所有session
 			request.getSession().removeAttribute(en.nextElement().toString());
 		}
-		//最后，还有用map除去。
+		// 最后，还有用map除去。
 		map.remove(en);
-		System.out.println("loginOut:"+(String) httpSession.getAttribute("registername")+"---"+(String) httpSession.getAttribute("username"));
+		System.out.println("loginOut:"
+				+ (String) httpSession.getAttribute("registername") + "---"
+				+ (String) httpSession.getAttribute("username"));
 	}
-	
+
 	@RequestMapping("/userMessage")
-	public String userMessage(HttpSession httpSession, Map map){
-		String username = (String)httpSession.getAttribute("registername");
-		
+	public String userMessage(HttpSession httpSession, Map map) {
+		String username = (String) httpSession.getAttribute("registername");
+
 		map.put("year", username.substring(0, 2));
-		
+
 		CollegeExample ce = new CollegeExample();
-		ce.createCriteria().andCidEqualTo(username.substring(2, 4)).andYearEqualTo(username.substring(0, 2));
+		ce.createCriteria().andCidEqualTo(username.substring(2, 4))
+				.andYearEqualTo(username.substring(0, 2));
 		List<College> collegeList = userService.selectByExample(ce);
 		System.out.println(collegeList.get(0).getName());
 		map.put("college", collegeList.get(0).getName());
-		
+
 		MajorExample me = new MajorExample();
-		me.createCriteria().andMidEqualTo(username.substring(4, 6)).andCidEqualTo(username.substring(2, 4)).andYearEqualTo(username.substring(0, 2));
+		me.createCriteria().andMidEqualTo(username.substring(4, 6))
+				.andCidEqualTo(username.substring(2, 4))
+				.andYearEqualTo(username.substring(0, 2));
 		List<Major> majorList = userService.selectByExample(me);
 		System.out.println(majorList.get(0).getName());
 		map.put("major", majorList.get(0).getName());
-		
+
 		map.put("class", username.substring(6, 8));
-		
+
 		map.put("student", username.substring(8, 10));
-		
+
 		return "usermessage.ftl";
 	}
-	
+
 	@RequestMapping("/toUserModify")
-	public String toUserModify(){
+	public String toUserModify() {
 		return "usermodify.ftl";
 	}
-	
+
 	@RequestMapping("/userModify")
-	public @ResponseBody String userModify(HttpSession httpSession, User user){
-		String uname = (String)httpSession.getAttribute("registername");
-		String username = user.getUsername();
-		String password = user.getPassword();
+	public @ResponseBody
+	String userModify(HttpServletRequest request, HttpSession httpSession) {
+		String password = request.getParameter("password");
+		System.out.println("password:" + password);
+		String uname = (String) httpSession.getAttribute("registername");
+		String username = uname;
 		User u = new User();
 		u.setUsername(username);
 		u.setPassword(password);
 		UserExample ue = new UserExample();
 		ue.createCriteria().andUsernameEqualTo(uname);
-		if(userService.updateByExampleSelective(u, ue) > 0){
+		if (userService.updateByExampleSelective(u, ue) > 0) {
 			return "1";
 		}
 		return "0";
