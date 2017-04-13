@@ -71,7 +71,6 @@
 
 	</div>
 
-	<iframe frameBorder="0" scrolling="no" src="inc/heartbeat.jsp"
-		style="width:1px; height:1px; display:none"></iframe>
+	
 </body>
 </html>

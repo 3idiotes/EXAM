@@ -27,58 +27,10 @@
 
 
 
-		<script src="inc/js/layer/layer.js" type="text/javascript"></script>
+		<script src="js/layer.js" type="text/javascript"></script>
 
 		<script type="text/javascript">
-				var tm = {
-					startExam : function(obj, pid){
-						var _tr = $(obj).parent().parent();
-						var _p_name = _tr.children("td").eq(0).text();
-						var _p_time = _tr.children("td").eq(2).text();
-						var _p_totalscore = _tr.children("td").eq(4).text();
-						var _p_passscore = _tr.children("td").eq(5).text();
-						
-
-						var html = [];
-						html.push('<div style="margin:20px">');
-						html.push('	<p style="line-height:20px">确定进入试卷并开始考试吗？</p>');
-						
-						html.push('	<table style="margin:0 auto; width:350px" border="0" cellpadding="0" cellspacing="0">');
-						html.push('	<tr>');
-						html.push('		<td width="80"><img src="skins/images/paper_pencil.png" width="60" /></td>');
-						html.push('		<td><p><b>试卷名称</b>：'+_p_name+'<p>');
-						html.push('			<p><b>考试时长</b>：'+_p_time+'<p>');
-						html.push('			<p><b>卷面总分</b>：'+_p_totalscore+'<p>');
-						html.push('			<p><b>及格分数</b>：'+_p_passscore+'<p>');
-						html.push('		</td>');
-						html.push('	</tr>');
-						html.push('</table>');
-
-						html.push('<p style="text-align:center; margin-top:30px">');
-						html.push('<button class="tm_btn tm_btn_primary" type="button" onclick="tm.joinExam(\''+pid+'\',this)">确定</button>');
-						html.push('</p>');
-
-						html.push('</div>');
-
-						layer.open({
-						  type: 1,
-						  title: '开始考试',
-						  shadeClose: true,
-						  shade: 0.8,
-						  area: ['450px', '310px'],
-						  content: html.join("")
-						}); 
-
-						return false;
-					},
-					joinExam : function(pid, _me){
-						$(_me).text('请稍等...');
-						$(_me).attr("disabled", true);
-						setTimeout(function(){
-							window.location.href="http://demo.tomexam.com/user/paper/paper_detail.thtml?pid="+pid;
-						}, 3000);
-					}
-				};
+				
 			</script>
 
 		<div class="tm_container">
