@@ -85,7 +85,7 @@
 					class="tmc_menu_test">我的考试</a>
 			</h2>
 			<ul>
-				<li><a href="user/paper/list.thtml" target="main">我的试卷</a></li>
+				<li><a href="exam/myExam" target="main">我的试卷</a></li>
 				<li><a href="exam/hisExam" target="main">历史考试</a></li>
 			</ul>
 		</div>

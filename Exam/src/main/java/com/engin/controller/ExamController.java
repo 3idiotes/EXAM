@@ -49,6 +49,8 @@ public class ExamController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	
+	
 
 	@RequestMapping("/getErrQueList")
 	public String getErrQueList(HttpSession httpSession, Map map) {
@@ -93,6 +95,13 @@ public class ExamController {
 		map.put("BqErrList", bqErrList);
 
 		return "allerror.ftl";
+	}
+	
+	
+	@RequestMapping("myExam")
+	public String myExam(HttpSession httpSession,Map map){
+		
+		return "myExam.ftl";
 	}
 
 	@RequestMapping("/hisExam")

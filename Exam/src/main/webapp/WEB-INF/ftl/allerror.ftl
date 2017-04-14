@@ -23,7 +23,11 @@
 
 </style>
 
-
+<script type="text/javascript">
+	function deleteCollection(){
+		alert("deletedTest");
+	}
+</script>
 
 
 </head>
@@ -52,7 +56,7 @@
         		<tr>
         			<td valign="top">
 						
-						<form action="user/collection/list.thtml" method="get">
+						
 						<div style="padding:8px; border:solid 1px #eee;">
 							不定项选择题
 						</div>
@@ -72,7 +76,7 @@
 														<#if item.d ??><li>D . ${item.d}</li></#if>
 													</ul>
 													<h1><b>标准答案 : </b>${item.answer}</h1>
-											<h5><a href="javascript:void(0);" onclick=""></a></h5>
+											<h5><a href="javascript:void(0);" onclick="deleteCollection(this)" deleteObj=${item.text}></a></h5>
 											<hr/>
 											
 											<div></div>
@@ -82,7 +86,7 @@
 								</tr>								
 							</tbody>
 			            </table>
-						</form>
+						
         			</td>
         		</tr>
         	</table>
@@ -92,7 +96,7 @@
         		<tr>
         			<td valign="top">
 						
-						<form action="user/collection/list.thtml" method="get">
+						
 						<div style="padding:8px; border:solid 1px #eee;">
 							简答题
 						</div>
@@ -106,7 +110,7 @@
 										<div class="tm_collection">											
 													<p>${item.text}</p>				
 													<h1><b>标准答案 : </b>${item.answer}</h1>
-											<h5><a href="javascript:void(0);" onclick=""></a></h5>
+											<h5><a href="javascript:void(0);" onclick="deleteCollection()"></a></h5>
 											<hr/>
 											
 											<div></div>
@@ -116,7 +120,7 @@
 								</tr>								
 							</tbody>
 			            </table>
-						</form>
+						
         			</td>
         		</tr>
         	</table>
