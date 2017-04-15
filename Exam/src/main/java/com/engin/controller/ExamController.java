@@ -77,14 +77,22 @@ public class ExamController {
 			return null;
 		}
 		List<QuestionWithBLOBs> queCollectionList = new ArrayList<QuestionWithBLOBs>();
+		
+		//按username来搜收藏的题号
 		QueCollectExample example = new QueCollectExample();
 		example.createCriteria().andUsernameEqualTo(username);
 		List<QueCollectKey> queCollectList = examService.selectByExample(example);
+		
+		
 		for(QueCollectKey key:queCollectList){
 			System.out.println("用户名："+key.getUsername()+"----"+"对应收藏题目编号:"+key.getId());
+			
+			//用queCollectList中得到的题目id来找对应的题目，塞到questionList里 
 			QuestionExample qe = new QuestionExample();
 			qe.createCriteria().andIdEqualTo(key.getId());
 			List<QuestionWithBLOBs> questionList = examService.selectByExampleWithBLOBs(qe);
+			
+			//把questionList里的东西塞到queCollectionList里
 			for (QuestionWithBLOBs r : questionList) {
 				queCollectionList.add(r);
 				System.out.println(r.getText() + "  答案：" + r.getAnswer());
