@@ -96,8 +96,8 @@
 					class="tmc_menu_self">自我检测</a>
 			</h2>
 			<ul>
-				<li><a href="user/selftest/new.thtml" target="main">自我检测</a></li>
-				<li><a href="user/selftest/history.thtml" target="main">自我检测记录</a></li>
+				<li><a href="exam/getErrQueList" target="main">我的错题集</a></li>
+				<li><a href="exam/myCollection" target="main">我的收藏</a></li>
 			</ul>
 		</div>
 
@@ -118,7 +118,7 @@
 					class="tmc_menu_account">个人信息</a>
 			</h2>
 			<ul>
-				<li><a href="exam/getErrQueList" target="main">我的错题集</a></li>
+				
 				<li><a href="exam/userMessage" target="main">账户信息</a></li>
 			</ul>
 		</div>

@@ -1,11 +1,14 @@
 package com.engin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +53,25 @@ public class ExamController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	
+	@RequestMapping("myCollection")
+	public String myCollection(HttpSession httpSession,Map map,HttpServletResponse response){	
+		String username = (String) httpSession.getAttribute("registername");
+		if(username == null){
+			response.setContentType("text/html; charset=utf-8");  
+		    PrintWriter out=null;
+			try {
+				out = response.getWriter();
+				out.print( "<script type='text/javascript'>top.location.href='../index/index'</script>");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			return null;
+		}
+		
+		
+		return "myCollection.ftl";
+	}
 
 	@RequestMapping("/getErrQueList")
 	public String getErrQueList(HttpSession httpSession, Map map) {
@@ -99,10 +120,11 @@ public class ExamController {
 	
 	
 	@RequestMapping("myExam")
-	public String myExam(HttpSession httpSession,Map map){
-		
+	public String myExam(HttpSession httpSession,Map map){	
 		return "myExam.ftl";
 	}
+	
+	
 
 	@RequestMapping("/hisExam")
 	public String hisExam(HttpSession httpSession, Map map) {

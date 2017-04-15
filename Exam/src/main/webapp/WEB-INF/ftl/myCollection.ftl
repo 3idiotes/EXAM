@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>我的错题集</title>
+<title>我的收藏</title>
 
 <#assign ppath= request.contextPath/>
 <script src="${ppath}/js/jquery-3.2.0.min.js" type="text/javascript"></script>
@@ -24,24 +24,27 @@
 </style>
 
 
-
+<script type="text/javascript">
+	function deleteCollection(){
+		alert("deletedTest");
+	}
+</script>
 
 </head>
-<#assign ppath= request.contextPath/>
 <body>
 	<div class="tm_main">
     	
 		<div class="tm_container">
 			<ul class="tm_breadcrumb">
 				<li><a href="common/welcome.thtml">首页</a> <span class="divider">&gt;</span></li>
-				<li class="active">我的错题集</li>
+				<li class="active">我的收藏</li>
 			</ul>
 		</div>
         
         <div class="tm_container">
         	<div class="tm_navtitle">
-				<h1>我的错题集</h1>
-                <span>错题收藏夹，如下列表是考试中做错的题目。</span>
+				<h1>我的收藏</h1>
+                <span>试题收藏夹，如下列表是收藏过的考试试题。</span>
             </div>
         </div>
 
@@ -62,22 +65,19 @@
 								
 								<tr>
 									<td>
-										<#list QueErrList as item>
+										
 										<div class="tm_collection">											
-													<p>${item.text}</p>				
+													<p></p>				
 													<ul>
-														<#if item.a ??><li>A . ${item.a}</li></#if>
-														<#if item.b ??><li>B . ${item.b}</li></#if>
-														<#if item.c ??><li>C . ${item.c}</li></#if>
-														<#if item.d ??><li>D . ${item.d}</li></#if>
+														
 													</ul>
-													<h1><b>标准答案 : </b>${item.answer}</h1>
+													<h1><b>标准答案 : </b></h1>
 											
 											<hr/>
 											
 											<div></div>
 										</div>
-										</#list>
+										
 									</td>
 								</tr>								
 							</tbody>
@@ -86,41 +86,7 @@
         			</td>
         		</tr>
         	</table>
-        </div> 
-        <div class="tm_container">
-        	<table width="100%" cellpadding="0" border="0">
-        		<tr>
-        			<td valign="top">
-						
-						
-						<div style="padding:8px; border:solid 1px #eee;">
-							简答题
-						</div>
-
-        				<table width="100%" border="0" class="tm_table_list">
-			                <tbody>
-								
-								<tr>
-									<td>
-										<#list BqErrList as item>
-										<div class="tm_collection">											
-													<p>${item.text}</p>				
-													<h1><b>标准答案 : </b>${item.answer}</h1>
-											
-											<hr/>
-											
-											<div></div>
-										</div>
-										</#list>
-									</td>
-								</tr>								
-							</tbody>
-			            </table>
-						
-        			</td>
-        		</tr>
-        	</table>
-        </div>         
+        </div>        
     </div>
 </body>
 </html>
