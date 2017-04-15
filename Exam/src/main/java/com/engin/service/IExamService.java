@@ -6,10 +6,14 @@ import com.engin.model.BigErrorExample;
 import com.engin.model.BigErrorKey;
 import com.engin.model.BigQuestion;
 import com.engin.model.BigQuestionExample;
+import com.engin.model.BqCollectExample;
+import com.engin.model.BqCollectKey;
 import com.engin.model.ErrorExample;
 import com.engin.model.ErrorKey;
 import com.engin.model.HisExam;
 import com.engin.model.HisExamExample;
+import com.engin.model.QueCollectExample;
+import com.engin.model.QueCollectKey;
 import com.engin.model.Question;
 import com.engin.model.QuestionExample;
 import com.engin.model.QuestionWithBLOBs;
@@ -23,4 +27,6 @@ public interface IExamService {
 	List<QuestionWithBLOBs> selectByExampleWithBLOBs(QuestionExample example);
 	List<BigQuestion> selectByExampleWithBLOBs(BigQuestionExample example);
 	List<HisExam> selectByExample(HisExamExample example);
+	List<QueCollectKey> selectByExample(QueCollectExample example);
+	List<BqCollectKey> selectByExample(BqCollectExample example);
 }

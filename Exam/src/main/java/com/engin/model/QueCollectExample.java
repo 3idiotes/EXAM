@@ -104,66 +104,6 @@ public class QueCollectExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andQcidIsNull() {
-            addCriterion("qcid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidIsNotNull() {
-            addCriterion("qcid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidEqualTo(Integer value) {
-            addCriterion("qcid =", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidNotEqualTo(Integer value) {
-            addCriterion("qcid <>", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidGreaterThan(Integer value) {
-            addCriterion("qcid >", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("qcid >=", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidLessThan(Integer value) {
-            addCriterion("qcid <", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidLessThanOrEqualTo(Integer value) {
-            addCriterion("qcid <=", value, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidIn(List<Integer> values) {
-            addCriterion("qcid in", values, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidNotIn(List<Integer> values) {
-            addCriterion("qcid not in", values, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidBetween(Integer value1, Integer value2) {
-            addCriterion("qcid between", value1, value2, "qcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andQcidNotBetween(Integer value1, Integer value2) {
-            addCriterion("qcid not between", value1, value2, "qcid");
-            return (Criteria) this;
-        }
-
         public Criteria andUsernameIsNull() {
             addCriterion("username is null");
             return (Criteria) this;

@@ -22,6 +22,8 @@ import com.engin.model.BigErrorExample;
 import com.engin.model.BigErrorKey;
 import com.engin.model.BigQuestion;
 import com.engin.model.BigQuestionExample;
+import com.engin.model.BqCollectExample;
+import com.engin.model.BqCollectKey;
 import com.engin.model.College;
 import com.engin.model.CollegeExample;
 import com.engin.model.CollegeKey;
@@ -32,6 +34,8 @@ import com.engin.model.HisExamExample;
 import com.engin.model.Major;
 import com.engin.model.MajorExample;
 import com.engin.model.MajorKey;
+import com.engin.model.QueCollectExample;
+import com.engin.model.QueCollectKey;
 import com.engin.model.Question;
 import com.engin.model.QuestionExample;
 import com.engin.model.QuestionWithBLOBs;
@@ -53,9 +57,13 @@ public class ExamController {
 	@Autowired
 	private UserServiceImpl userService;
 	
+	/**
+	 * 用于操作收藏题目。从数据库提取数据，再返回到myCollection页面上。
+	 */
 	@RequestMapping("myCollection")
 	public String myCollection(HttpSession httpSession,Map map,HttpServletResponse response){	
 		String username = (String) httpSession.getAttribute("registername");
+		//判断session是否失效了，失效就跳回登录界面
 		if(username == null){
 			response.setContentType("text/html; charset=utf-8");  
 		    PrintWriter out=null;
@@ -68,8 +76,42 @@ public class ExamController {
 			} 
 			return null;
 		}
+		List<QuestionWithBLOBs> queCollectionList = new ArrayList<QuestionWithBLOBs>();
+		QueCollectExample example = new QueCollectExample();
+		example.createCriteria().andUsernameEqualTo(username);
+		List<QueCollectKey> queCollectList = examService.selectByExample(example);
+		for(QueCollectKey key:queCollectList){
+			System.out.println("用户名："+key.getUsername()+"----"+"对应收藏题目编号:"+key.getId());
+			QuestionExample qe = new QuestionExample();
+			qe.createCriteria().andIdEqualTo(key.getId());
+			List<QuestionWithBLOBs> questionList = examService.selectByExampleWithBLOBs(qe);
+			for (QuestionWithBLOBs r : questionList) {
+				queCollectionList.add(r);
+				System.out.println(r.getText() + "  答案：" + r.getAnswer());
+				System.out.println("A." + r.getA() + "   B." + r.getB()
+						+ "   C." + r.getC() + "   D." + r.getD());
+			}
+		}
+		map.put("queCollection", queCollectionList);
 		
+		System.out.println("----------");
 		
+		List<BigQuestion> bqCollectionList = new ArrayList<BigQuestion>();
+		BqCollectExample bqExample = new BqCollectExample();
+		bqExample.createCriteria().andUsernameEqualTo(username);
+		List<BqCollectKey> bqCollectList = examService.selectByExample(bqExample);
+		for(BqCollectKey key:bqCollectList){
+			System.out.println("用户名："+key.getUsername()+"----"+"对应收藏题目大题编号:"+key.getBqid());
+			BigQuestionExample bqe= new BigQuestionExample();
+			bqe.createCriteria().andBqidEqualTo(key.getBqid());
+			List<BigQuestion> bqueList = examService.selectByExampleWithBLOBs(bqe);
+			for (BigQuestion r : bqueList) {
+				bqCollectionList.add(r);
+				System.out.println(r.getText());
+				System.out.println("答案：" + r.getAnswer());
+			}
+		}
+		map.put("bqCollection", bqCollectionList);
 		return "myCollection.ftl";
 	}
 

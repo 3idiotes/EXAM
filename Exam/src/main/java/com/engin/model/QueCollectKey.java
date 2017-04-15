@@ -1,19 +1,9 @@
 package com.engin.model;
 
 public class QueCollectKey {
-    private Integer qcid;
-
     private String username;
 
     private String id;
-
-    public Integer getQcid() {
-        return qcid;
-    }
-
-    public void setQcid(Integer qcid) {
-        this.qcid = qcid;
-    }
 
     public String getUsername() {
         return username;

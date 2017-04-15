@@ -104,66 +104,6 @@ public class BqCollectExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBqcidIsNull() {
-            addCriterion("bqcid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidIsNotNull() {
-            addCriterion("bqcid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidEqualTo(Integer value) {
-            addCriterion("bqcid =", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidNotEqualTo(Integer value) {
-            addCriterion("bqcid <>", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidGreaterThan(Integer value) {
-            addCriterion("bqcid >", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("bqcid >=", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidLessThan(Integer value) {
-            addCriterion("bqcid <", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidLessThanOrEqualTo(Integer value) {
-            addCriterion("bqcid <=", value, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidIn(List<Integer> values) {
-            addCriterion("bqcid in", values, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidNotIn(List<Integer> values) {
-            addCriterion("bqcid not in", values, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidBetween(Integer value1, Integer value2) {
-            addCriterion("bqcid between", value1, value2, "bqcid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBqcidNotBetween(Integer value1, Integer value2) {
-            addCriterion("bqcid not between", value1, value2, "bqcid");
-            return (Criteria) this;
-        }
-
         public Criteria andUsernameIsNull() {
             addCriterion("username is null");
             return (Criteria) this;

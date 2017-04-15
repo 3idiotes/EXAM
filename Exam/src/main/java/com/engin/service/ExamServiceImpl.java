@@ -7,18 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.engin.dao.BigErrorMapper;
 import com.engin.dao.BigQuestionMapper;
+import com.engin.dao.BqCollectMapper;
 import com.engin.dao.ErrorMapper;
 import com.engin.dao.HisExamMapper;
+import com.engin.dao.QueCollectMapper;
 import com.engin.dao.QuestionMapper;
 import com.engin.dao.UserMapper;
 import com.engin.model.BigErrorExample;
 import com.engin.model.BigErrorKey;
 import com.engin.model.BigQuestion;
 import com.engin.model.BigQuestionExample;
+import com.engin.model.BqCollectExample;
+import com.engin.model.BqCollectKey;
 import com.engin.model.ErrorExample;
 import com.engin.model.ErrorKey;
 import com.engin.model.HisExam;
 import com.engin.model.HisExamExample;
+import com.engin.model.QueCollectExample;
+import com.engin.model.QueCollectKey;
 import com.engin.model.Question;
 import com.engin.model.QuestionExample;
 import com.engin.model.QuestionWithBLOBs;
@@ -88,6 +94,23 @@ public class ExamServiceImpl implements IExamService {
 	public List<HisExam> selectByExample(HisExamExample example) {
 		// TODO Auto-generated method stub
 		return hisExamDao.selectByExample(example);
+	}
+
+	
+	@Autowired
+	private QueCollectMapper queCollectDao;
+	@Override
+	public List<QueCollectKey> selectByExample(QueCollectExample example) {
+		// TODO Auto-generated method stub
+		return queCollectDao.selectByExample(example);
+	}
+
+	@Autowired
+	private BqCollectMapper bqCollectDao;
+	@Override
+	public List<BqCollectKey> selectByExample(BqCollectExample example) {
+		// TODO Auto-generated method stub
+		return bqCollectDao.selectByExample(example);
 	}
 
 }

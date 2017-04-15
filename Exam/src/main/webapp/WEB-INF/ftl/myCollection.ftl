@@ -36,7 +36,7 @@
     	
 		<div class="tm_container">
 			<ul class="tm_breadcrumb">
-				<li><a href="common/welcome.thtml">首页</a> <span class="divider">&gt;</span></li>
+				<li><a href="${ppath}/welcome.jsp">首页</a> <span class="divider">&gt;</span></li>
 				<li class="active">我的收藏</li>
 			</ul>
 		</div>
@@ -65,24 +65,60 @@
 								
 								<tr>
 									<td>
-										
+										<#list queCollection as item>
 										<div class="tm_collection">											
-													<p></p>				
+													<p>${item.text}</p>				
 													<ul>
-														
+														<#if item.a ??><li>A . ${item.a}</li></#if>
+														<#if item.b ??><li>B . ${item.b}</li></#if>
+														<#if item.c ??><li>C . ${item.c}</li></#if>
+														<#if item.d ??><li>D . ${item.d}</li></#if>
 													</ul>
-													<h1><b>标准答案 : </b></h1>
-											
+													<h1><b>标准答案 : </b>${item.answer}</h1>
+											<h5><a href="javascript:void(0);" onclick="deleteCollection()" ></a></h5>
 											<hr/>
 											
 											<div></div>
 										</div>
-										
+										</#list>
+									</td>
+								</tr>								
+							</tbody>
+			            </table>
+						<div class="tm_container">
+        	<table width="100%" cellpadding="0" border="0">
+        		<tr>
+        			<td valign="top">
+						
+						
+						<div style="padding:8px; border:solid 1px #eee;">
+							简答题
+						</div>
+
+        				<table width="100%" border="0" class="tm_table_list">
+			                <tbody>
+								
+								<tr>
+									<td>
+										<#list bqCollection as item>
+										<div class="tm_collection">											
+													<p>${item.text}</p>				
+													<h1><b>标准答案 : </b>${item.answer}</h1>
+											
+											<hr/>
+											<h5><a href="javascript:void(0);" onclick="deleteCollection()" ></a></h5>
+											<div></div>
+										</div>
+										</#list>
 									</td>
 								</tr>								
 							</tbody>
 			            </table>
 						
+        			</td>
+        		</tr>
+        	</table>
+        </div>         
         			</td>
         		</tr>
         	</table>
