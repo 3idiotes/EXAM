@@ -29,4 +29,6 @@ public interface IExamService {
 	List<HisExam> selectByExample(HisExamExample example);
 	List<QueCollectKey> selectByExample(QueCollectExample example);
 	List<BqCollectKey> selectByExample(BqCollectExample example);
+	int deleteByExample(QueCollectExample example);
+	int deleteByExample(BqCollectExample example);
 }

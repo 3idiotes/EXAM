@@ -178,7 +178,7 @@
         }
         
         function doGoBack(){
-        	window.location.href="${ppath}/user/loginm";
+        	window.location.href="${ppath}/user/deleteQue";
         }
 	</script>
 </head>

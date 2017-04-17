@@ -112,5 +112,20 @@ public class ExamServiceImpl implements IExamService {
 		// TODO Auto-generated method stub
 		return bqCollectDao.selectByExample(example);
 	}
+	
+	
+	@Override
+	public int deleteByExample(QueCollectExample example) {
+		// TODO Auto-generated method stub
+		return queCollectDao.deleteByExample(example);
+	}
+
+	@Override
+	public int deleteByExample(BqCollectExample example) {
+		// TODO Auto-generated method stub
+		return bqCollectDao.deleteByExample(example);
+	}
+
+	
 
 }

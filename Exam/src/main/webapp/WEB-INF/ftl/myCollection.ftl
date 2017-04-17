@@ -5,7 +5,9 @@
 <#assign ppath= request.contextPath/>
 <script src="${ppath}/js/jquery-3.2.0.min.js" type="text/javascript"></script>
 <script src="${ppath}/js/baseutil.js" type="text/javascript"></script>
+<script src="${ppath}/js/window.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${ppath}/css/style.css" />	
+<link rel="stylesheet" type="text/css" href="${ppath}/css/window.css" />	
 
 <style>
     	.tm_collection{margin: 10px 10px; position: relative;}
@@ -25,8 +27,22 @@
 
 
 <script type="text/javascript">
-	function deleteCollection(){
-		alert("deletedTest");
+	function _alert(){
+		win.alert("系统提示","删除成功");
+	}
+
+	function deleteQue(id){
+		
+		//_alert();
+		alert("删除成功");
+		window.location.href="${ppath}/exam/deleteQue?id="+id;
+	}
+	
+	function deleteBque(Bid){
+		//_alert();
+		alert("删除成功");
+		window.location.href="${ppath}/exam/deleteBque?Bid="+Bid;
+		
 	}
 </script>
 
@@ -75,7 +91,7 @@
 														<#if item.d ??><li>D . ${item.d}</li></#if>
 													</ul>
 													<h1><b>标准答案 : </b>${item.answer}</h1>
-											<h5><a href="javascript:void(0);" onclick="deleteCollection()" ></a></h5>
+											<h5><a href="javascript:void(0);" onclick="deleteQue('${item.id}')" ></a></h5>
 											<hr/>
 											
 											<div></div>
@@ -106,7 +122,7 @@
 													<h1><b>标准答案 : </b>${item.answer}</h1>
 											
 											<hr/>
-											<h5><a href="javascript:void(0);" onclick="deleteCollection()" ></a></h5>
+											<h5><a href="javascript:void(0);" onclick="deleteBque('${item.bqid}')" ></a></h5>
 											<div></div>
 										</div>
 										</#list>
